@@ -1,4 +1,3 @@
 gunicorn
 flask
-json
 werkzeug.utils
