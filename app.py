@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, send_from_directory
 import os
 import json
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+
 
 # Set secret key for session management
 app.secret_key = 'supersecretkey123!'  # Change this to a unique secret key
@@ -34,6 +35,10 @@ def load_papers():
 def save_papers(papers):
     with open(DATA_FILE, 'w') as f:
         json.dump(papers, f, indent=4)
+
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
 
 @app.route('/')
 def index():
