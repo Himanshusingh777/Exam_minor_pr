@@ -11,8 +11,6 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: row;
             color: #333;
             background-color: #f5f5f5;
         }
@@ -28,6 +26,8 @@
             padding-top: 20px;
             position: fixed;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            z-index: 1000;
         }
 
         .logo {
@@ -128,6 +128,23 @@
             margin-left: 230px;
             width: calc(100% - 230px);
             padding: 30px;
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+
+        /* Mobile menu toggle button */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: #6e41a7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         .page-header {
@@ -184,6 +201,7 @@
             border-radius: 4px;
             font-size: 1em;
             appearance: none;
+            box-sizing: border-box;
         }
         
         .form-control:focus {
@@ -233,6 +251,8 @@
             cursor: pointer;
             margin-top: 20px;
             transition: background-color 0.2s;
+            width: 100%;
+            max-width: 300px;
         }
         
         .submit-btn:hover {
@@ -270,10 +290,100 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .dashboard {
+                width: 200px;
+            }
+            .content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                display: block;
+            }
+            .dashboard {
+                transform: translateX(-100%);
+                width: 250px;
+            }
+            .dashboard.open {
+                transform: translateX(0);
+            }
+            .content {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+                padding-top: 60px;
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .form-group {
+                margin-bottom: 10px;
+            }
+            .dropzone {
+                padding: 20px 10px;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center;
+            }
+            .page-header i {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .upload-form {
+                padding: 15px;
+            }
+            .submit-btn {
+                width: 100%;
+                max-width: none;
+            }
+            .dropzone-icon {
+                font-size: 2em;
+            }
+            .admin-avatar {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Dim overlay when mobile menu is open */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="dashboard">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="dashboard" id="dashboard">
         <div class="logo">
             <i class="fas fa-cubes"></i>
             <span class="logo-text">Admin Panel</span>
@@ -454,6 +564,21 @@
                 fileInput.files = e.dataTransfer.files;
                 dropzone.querySelector('.dropzone-text').textContent = e.dataTransfer.files[0].name;
             }
+        });
+        
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const dashboard = document.getElementById('dashboard');
+        const overlay = document.getElementById('overlay');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            dashboard.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            dashboard.classList.remove('open');
+            overlay.classList.remove('active');
         });
         
         // Form submission handling - preserving original logic
