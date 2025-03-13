@@ -39,6 +39,7 @@
             left: 0;
             width: 280px;
             height: 100%;
+            transition: transform 0.3s ease-in-out;
             background: var(--primary-dark);
             color: var(--light);
             display: flex;
@@ -48,6 +49,22 @@
             box-shadow: var(--shadow);
             z-index: 1000;
             transition: var(--transition);
+        }
+
+        .hidden {
+            transform: translateX(-100%);
+        }
+
+        #toggleBtn {
+            position: fixed;
+            top: 20px;
+            left: 260px;
+            background-color:rgb(29, 28, 28);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
         #dashboard img {
@@ -310,96 +327,83 @@
             }
         }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    #dashboard {
-        width: 220px;
-    }
-    
-    main {
-        margin-left: 220px;
-        width: calc(100% - 220px);
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 2em;
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #dashboard {
+                width: 240px;
+            }
+            
+            main {
+                margin-left: 240px;
+                width: calc(100% - 240px);
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
 
-@media (max-width: 768px) {
-    #dashboard {
-        width: 200px;
-    }
-    
-    #dashboard img {
-        width: 80px;
-        height: 80px;
-    }
-    
-    main {
-        margin-left: 200px;
-        width: calc(100% - 200px);
-        padding: 15px;
-    }
-    
-    h1 {
-        font-size: 1.6em;
-    }
-    
-    form {
-        width: 90%;
-        padding: 20px;
-    }
-    
-    .results {
-        width: 90%;
-    }
-}
+        @media (max-width: 768px) {
+            #dashboard {
+                width: 220px;
+            }
+            
+            #dashboard img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            main {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            form {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .results {
+                width: 95%;
+            }
+        }
 
-@media (max-width: 576px) {
-    #dashboard {
-        width: 60px;
-        overflow: hidden;
-    }
-    
-    #dashboard img, #dashboard h2 {
-        display: none;
-    }
-    
-    #dashboard ul li {
-        padding: 15px 5px;
-        justify-content: center;
-    }
-    
-    #dashboard ul li i {
-        margin: 0;
-        font-size: 1.5em;
-    }
-    
-    main {
-        margin-left: 60px;
-        width: calc(100% - 60px);
-    }
-
-    h1 {
-        font-size: 1.4em;
-    }
-
-    form {
-        width: 100%;
-        padding: 15px;
-    }
-
-    table {
-        font-size: 0.8em;
-    }
-
-    table th, table td {
-        padding: 8px;
-    }
-}
-
+        @media (max-width: 576px) {
+            #dashboard {
+                width: 60px;
+                overflow: hidden;
+            }
+            
+            #dashboard img, #dashboard h2 {
+                display: none;
+            }
+            
+            #dashboard ul li {
+                padding: 15px 5px;
+                justify-content: center;
+            }
+            
+            #dashboard ul li i {
+                margin: 0;
+                font-size: 1.5em;
+            }
+            
+            main {
+                margin-left: 60px;
+                width: calc(100% - 60px);
+            }
+            
+            table th, table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
 
         /* Additional Enhancements */
         .no-results {
@@ -433,7 +437,13 @@
     </style>
 </head>
 <body>
+
+
     <div id="dashboard">
+        <button id="toggleBtn"> 
+            <i class="fas fa-bars"></i>
+        </button>
+
         <img src="/static/Images/student.jpeg" alt="Student Profile">
         <h2>Student Portal</h2>
         <ul>
@@ -576,6 +586,10 @@
                         }
                     });
                 }
+            });
+
+            document.getElementById("toggleBtn").addEventListener("click", function () {
+                document.getElementById("dashboard").classList.toggle("hidden");
             });
             
             // Clear validation styling on change
