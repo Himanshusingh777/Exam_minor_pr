@@ -434,13 +434,37 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary);
         }
+        .drive-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .drive-btn:hover {
+            background: #0056b3;
+        }
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-top: 15px;
+            display: none;
+        }
+       
     </style>
 </head>
 <body>
 
 
     <div id="dashboard">
-        <button id="toggleBtn"> 
+        <button id="toggleBtn"> <
             <i class="fas fa-bars"></i>
         </button>
 
@@ -451,7 +475,11 @@
             <li><i class="fas fa-university"></i> Branches</li>
             <li><i class="fas fa-file-alt"></i> Paper Types</li>
             <li><i class="fas fa-calendar-alt"></i> Years</li>
-            <li><i class="fas fa-sign-out-alt"></i> Logout</li>
+            <a href="login.html" class="nav-link" style="color: white; text-decoration: none;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span style="color: white;">Logout</span>
+            </a>
+            
         </ul>
     </div>
     <main>
@@ -544,7 +572,18 @@
                     <i class="fas fa-info-circle"></i> No papers found based on the search criteria.
                 </div>
             {% endif %}
+
+            
         </div>
+
+        
+        <button class="drive-btn" onclick="redirectToDrive()">
+            <i class="fas fa-folder-open"></i> Open Drive Folder
+        </button>
+        
+        <p class="message" id="redirectMessage">Please wait, we are redirecting you...</p>
+        
+        
     </main>
 
     <script>
@@ -601,7 +640,12 @@
                 });
             });
         });
-
+        function redirectToDrive() {
+            document.getElementById("redirectMessage").style.display = "block"; // Show message
+            setTimeout(function () {
+                window.open("https://drive.google.com/drive/folders/1_AihVKv4BQLjVPZ4bfE9l3YMfmCDDZ_g?usp=sharing", "_blank");
+            }, 3000); // 3 seconds delay
+        }
         // Add shake animation for form validation
         document.head.insertAdjacentHTML('beforeend', `
             <style>
