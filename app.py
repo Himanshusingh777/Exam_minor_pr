@@ -54,13 +54,13 @@ def login():
         role = request.form.get('role')  # 'admin' or 'student'
 
         # Simple login logic
-        if username == 'admin' and password == 'admin123' and role == 'admin':
+        if username == 'admin' and password == 'hari3306' and role == 'admin':
             session['role'] = 'admin'  # Set role in session
             return render_template('login.html', welcome_message="Welcome Admin")
         elif username == 'student' and password == 'student123' and role == 'student':
             session['role'] = 'student'  # Set role in session
             return render_template('login.html', welcome_message="Welcome Student")
-        elif username == 'admin' and password == 'admin1234' and role == 'admin':
+        elif username == 'admin' and password == 'himanshu3306' and role == 'admin':
             session['role'] = 'admin'  # Set role in session
             return render_template('upload_images.html', welcome_message="Welcome admin")
         else:
@@ -203,6 +203,10 @@ def upload_syllabus():
             flash("No file selected for upload.", "error")
     
     return render_template('upload_images.html', heading="Upload Syllabus")
+
+@app.route('/soon')
+def soon():
+    return render_template('comesoon.html')
 
 
 @app.route('/view_syllabus')
