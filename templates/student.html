@@ -58,13 +58,14 @@
         #toggleBtn {
             position: fixed;
             top: 20px;
-            left: 260px;
-            background-color:rgb(29, 28, 28);
+            left: 20px;
+            background-color: rgb(29, 28, 28);
             color: white;
             border: none;
             padding: 10px 15px;
             cursor: pointer;
             border-radius: 5px;
+            z-index: 1001;
         }
 
         #dashboard img {
@@ -238,6 +239,11 @@
             width: 90%;
         }
 
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
         table {
             width: 100%;
             border-collapse: separate;
@@ -327,81 +333,138 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
+        .drive-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .drive-btn:hover {
+            background: #0056b3;
+        }
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Improved Responsive Design */
+        @media (max-width: 1024px) {
             #dashboard {
-                width: 240px;
+                width: 250px;
             }
             
             main {
-                margin-left: 240px;
-                width: calc(100% - 240px);
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2em;
+                margin-left: 250px;
+                width: calc(100% - 250px);
+                padding: 20px 15px;
             }
         }
 
         @media (max-width: 768px) {
-            #dashboard {
-                width: 220px;
+            body {
+                overflow-x: hidden;
             }
             
-            #dashboard img {
-                width: 80px;
-                height: 80px;
+            #dashboard {
+                width: 260px;
+                transform: translateX(-100%);
+            }
+            
+            #dashboard.active {
+                transform: translateX(0);
             }
             
             main {
-                margin-left: 220px;
-                width: calc(100% - 220px);
-                padding: 15px;
+                margin-left: 0;
+                width: 100%;
+                padding: 20px 15px;
+                margin-top: 30px;
             }
             
             h1 {
                 font-size: 1.8em;
+                margin-top: 50px;
             }
             
             form {
-                width: 95%;
+                width: 90%;
                 padding: 20px;
             }
             
             .results {
                 width: 95%;
             }
-        }
-
-        @media (max-width: 576px) {
-            #dashboard {
-                width: 60px;
-                overflow: hidden;
-            }
-            
-            #dashboard img, #dashboard h2 {
-                display: none;
-            }
-            
-            #dashboard ul li {
-                padding: 15px 5px;
-                justify-content: center;
-            }
-            
-            #dashboard ul li i {
-                margin: 0;
-                font-size: 1.5em;
-            }
-            
-            main {
-                margin-left: 60px;
-                width: calc(100% - 60px);
-            }
             
             table th, table td {
                 padding: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+            
+            form {
+                padding: 15px;
+                width: 95%;
+            }
+            
+            select {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            form button {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            table th, table td {
+                padding: 8px;
                 font-size: 0.9em;
+            }
+            
+            .drive-btn {
+                width: 90%;
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            
+            table th, table td {
+                padding: 6px;
+                font-size: 0.8em;
+            }
+            
+            #dashboard {
+                width: 240px;
+            }
+            
+            #dashboard img {
+                width: 80px;
+                height: 80px;
             }
         }
 
@@ -434,28 +497,12 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary);
         }
-        .drive-btn {
-            display: inline-block;
-            padding: 12px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            background: #007BFF;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .drive-btn:hover {
-            background: #0056b3;
-        }
-        .message {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff6600;
-            margin-top: 15px;
-            display: none;
+
+        /* Add shake animation for form validation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+            20%, 40%, 60%, 80% { transform: translateX(3px); }
         }
        
     </style>
