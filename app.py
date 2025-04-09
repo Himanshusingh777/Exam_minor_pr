@@ -231,6 +231,10 @@ def view_syllabus():
 def soon():
     return render_template('comesoon.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 
 
 if __name__ == '__main__':
