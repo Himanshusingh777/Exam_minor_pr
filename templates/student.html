@@ -640,7 +640,7 @@ main > *:nth-child(4) { animation-delay: 0.3s; }
 
     <div id="dashboard">
         <button id="toggleBtn"><i class="fas fa-chevron-left"></i></button>
-        <img src="/static/images/student.jpeg" alt="Student Profile">
+                <img src="{{ url_for('static', filename='images/student.jpeg') }}" alt="Student Profile">
         <h2>Student Portal</h2>
         <ul>
             <li><i class="fas fa-book"></i> Courses</li>
