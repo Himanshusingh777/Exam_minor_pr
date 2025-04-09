@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os
 import json
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__, static_folder='static')
-
+app = Flask(__name__)
 
 # Set secret key for session management
 app.secret_key = 'supersecretkey123!'  # Change this to a unique secret key
@@ -36,10 +35,6 @@ def save_papers(papers):
     with open(DATA_FILE, 'w') as f:
         json.dump(papers, f, indent=4)
 
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    return send_from_directory('static', filename)
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -54,12 +49,15 @@ def login():
         role = request.form.get('role')  # 'admin' or 'student'
 
         # Simple login logic
-        if username == 'admin' and password == 'hari3306' and role == 'admin':
+        if username == '22CSE1007' and password == 'hari3306' and role == 'admin':
             session['role'] = 'admin'  # Set role in session
             return render_template('login.html', welcome_message="Welcome Admin")
-        elif username == 'student' and password == 'student123' and role == 'student':
+        elif username == '22CSE657' and password == 'student123' and role == 'student':
             session['role'] = 'student'  # Set role in session
-            return render_template('login.html', welcome_message="Welcome Student")
+            return render_template('login.html', welcome_message=" ")
+        elif username == '22CSE445' and password == 'student123' and role == 'student':
+            session['role'] = 'student'  # Set role in session
+            return render_template('login.html', welcome_message=" ")
         elif username == 'admin' and password == 'himanshu3306' and role == 'admin':
             session['role'] = 'admin'  # Set role in session
             return render_template('upload_images.html', welcome_message="Welcome admin")
@@ -204,10 +202,6 @@ def upload_syllabus():
     
     return render_template('upload_images.html', heading="Upload Syllabus")
 
-@app.route('/soon')
-def soon():
-    return render_template('comesoon.html')
-
 
 @app.route('/view_syllabus')
 def view_syllabus():
@@ -231,6 +225,11 @@ def view_syllabus():
 
     return render_template('view_images.html', heading="View Syllabus", images=syllabus_files)
 
+
+
+@app.route('/soon')
+def soon():
+    return render_template('comesoon.html')
 
 
 
