@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        
+         :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #f7f7f7;
+            --dark-color: #333;
+            --text-color: #555;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        /* Scroll Reveal Animation */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Header Styles */
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+        /* Main Content Styles */
+        
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+            min-height: calc(100vh - 80px - 150px);
+            /* Adjust for header and footer */
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title h1::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        .page-title p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Contact Section Styles */
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 800px;
+        }
+        
+        .contact-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+            top: 0;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .info-card i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .info-card p {
+            margin-left: 25px;
+            color: var(--text-color);
+        }
+        
+        .info-card a {
+            display: flex;
+            align-items: center;
+            margin-left: 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+        
+        .info-card a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .info-card a i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        /* Map Section Styles */
+        
+        .map-section {
+            margin-bottom: 3rem;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 1;
+            transition: var(--transition);
+        }
+        
+        .map-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .map-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .map-btn {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .map-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .map-btn i {
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+        /* Social Links Styles */
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            margin: 0 10px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+            transform: scale(0);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover::before {
+            transform: scale(1);
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .social-links a.facebook:hover {
+            background-color: #3b5998;
+            color: white;
+        }
+        
+        .social-links a.twitter:hover {
+            background-color: #1da1f2;
+            color: white;
+        }
+        
+        .social-links a.instagram:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            color: white;
+        }
+        
+        .social-links a.linkedin:hover {
+            background-color: #0077b5;
+            color: white;
+        }
+        
+        .social-links a.whatsapp:hover {
+            background-color: #25d366;
+            color: white;
+        }
+        /* Theme Toggler */
+        
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        /* Dark Mode Styles */
+        
+        body.dark-mode {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode header {
+            background-color: #16213e;
+        }
+        
+        body.dark-mode header.scrolled {
+            background-color: rgba(22, 33, 62, 0.95);
+        }
+        
+        body.dark-mode .page-title h1,
+        body.dark-mode .section-header h2 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .info-card {
+            background-color: #16213e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .info-card h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .info-card p {
+            color: #b0b0b0;
+        }
+        
+        body.dark-mode .social-links a {
+            background-color: #16213e;
+            color: #e0e0e0;
+        }
+        /* Footer Styles */
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        body.dark-mode footer {
+            background-color: #0f3460;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        /* Back to Top Button */
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+        /* Loading Animation */
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid transparent;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* Responsive Styles */
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                background-color: var(--secondary-color);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .map-container {
+                height: 350px;
+            }
+            .contact-card-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer-links li {
+                margin: 5px 0;
+            }
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slideUp {
+            animation: slideUp 1s ease forwards;
+        }
+        /* Hover Animation for Contact Methods */
+        
+        .contact-method {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-method::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 152, 219, 0.1);
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+        
+        .contact-method:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fas fa-building"></i> YourCompany</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-title reveal">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team through any of these channels</p>
+        </div>
+
+        <!-- Location Section -->
+        <div class="section-header reveal">
+            <h2>Our Location</h2>
+        </div>
+
+        <div class="info-card reveal">
+            <h3><i class="fas fa-map-marker-alt"></i> Our Office</h3>
+            <p>GIET University</p>
+            <p>Gunupur, RAYAGADA- 221304</p>
+            <p>INDIA</p>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="section-header reveal">
+            <h2>Contact Information</h2>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-info">
+                <div class="contact-card-grid">
+                    <div class="info-card reveal">
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <a href="mailto:info@yourcompany.com" class="contact-method"><i class="fas fa-envelope"></i> singhhimanshu3306@gmail.com</a>
+                        <a href="mailto:support@yourcompany.com" class="contact-method"><i class="fas fa-envelope"></i> rahuldevbanchhar@gmail.com</a>
+                    </div>
+
+                    <div class="info-card reveal">
+                        <h3><i class="fas fa-phone"></i> Call Us</h3>
+                        <a href="tel:+11234567890" class="contact-method"><i class="fas fa-phone"></i> +91-6200036129</a>
+                        <a href="tel:+11234567891" class="contact-method"><i class="fas fa-headset"></i> +91-8114750993</a>
+                    </div>
+
+                    <div class="info-card reveal">
+                        <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
+                        <a href="https://wa.me/11234567890" class="contact-method"><i class="fab fa-whatsapp"></i> +91-6200036129</a>
+                        <p>Available 24/7 for urgent inquiries</p>
+                    </div>
+
+                    <div class="info-card reveal">
+                        <h3><i class="fab fa-linkedin"></i> LinkedIn</h3>
+                        <a href="https://www.linkedin.com/in/himanshu-singh-264291297/" target="_blank" class="contact-method"><i class="fab fa-linkedin"></i> REPOSITORY</a>
+                        <p>Connect with us professionally</p>
+                    </div>
+
+                    <div class="info-card reveal">
+                        <h3><i class="fab fa-instagram"></i> Instagram</h3>
+                        <a href="https://www.instagram.com/yourcompany" target="_blank" class="contact-method"><i class="fab fa-instagram"></i> @REPOSITORY</a>
+                        <p>Follow our latest updates</p>
+                    </div>
+
+                    <div class="info-card reveal">
+                        <h3><i class="fas fa-clock"></i> Business Hours</h3>
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                        <p>Saturday: 9:00 AM - 1:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="section-header reveal">
+            <h2>Find Us Here</h2>
+        </div>
+
+        <div class="map-section reveal">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay" id="mapOverlay">
+                    <span>Click to load the map</span>
+                </div>
+                <div class="map-controls">
+                    <button class="map-btn" id="zoomIn" title="Zoom In">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="map-btn" id="zoomOut" title="Zoom Out">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="map-btn" id="locateMe" title="My Location">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="section-header reveal">
+            <h2>Follow Us On Social Media</h2>
+        </div>
+
+        <div class="social-links reveal">
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/yourcompany" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/yourcompany" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/11234567890" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo"><i class="fas fa-building"></i> YourCompany</div>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+                <div class="copyright">
+                    &copy; <span id="currentYear">2025</span> YourCompany. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // References to DOM elements
+            const loader = document.querySelector('.loader');
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            const header = document.getElementById('header');
+            const themeToggle = document.getElementById('themeToggle');
+            const backToTop = document.getElementById('backToTop');
+            const mapOverlay = document.getElementById('mapOverlay');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const locateMeBtn = document.getElementById('locateMe');
+            const revealElements = document.querySelectorAll('.reveal');
+            const currentYearEl = document.getElementById('currentYear');
+
+            // Update current year in footer
+            currentYearEl.textContent = new Date().getFullYear();
+
+            // Hide loader after page loads
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                }, 500);
+            });
+
+            // Mobile menu toggle
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    hamburger.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Shrink header on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Show/hide back to top button
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+
+                // Scroll reveal animation
+                revealElements.forEach(el => {
+                    let elementTop = el.getBoundingClientRect().top;
+                    let windowHeight = window.innerHeight;
+                    if (elementTop < windowHeight - 100) {
+                        el.classList.add('active');
+                    }
+                });
+            });
+
+            // Scroll to top button
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Theme toggle
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+
+            // Map functionality
+            let map, marker;
+
+            // Load map when overlay is clicked
+            mapOverlay.addEventListener('click', function() {
+                mapOverlay.classList.add('hidden');
+                initMap();
+            });
+
+            function initMap() {
+                // Check if Google Maps API is loaded
+                if (typeof google === 'undefined') {
+                    // If not loaded, load the Google Maps API script
+                    const script = document.createElement('script');
+                    script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=onGoogleMapsLoaded';
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+
+                    // Define the callback function
+                    window.onGoogleMapsLoaded = function() {
+                        createMap();
+                    };
+                } else {
+                    createMap();
+                }
+            }
+
+            function createMap() {
+                // Office coordinates (example coordinates - replace with actual location)
+                const officeLocation = {
+                    lat: 40.7128,
+                    lng: -74.0060
+                };
+
+                // Create map
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: officeLocation,
+                    zoom: 15,
+                    styles: [{
+                            elementType: 'geometry',
+                            stylers: [{
+                                color: '#242f3e'
+                            }]
+                        }, {
+                            elementType: 'labels.text.stroke',
+                            stylers: [{
+                                color: '#242f3e'
+                            }]
+                        }, {
+                            elementType: 'labels.text.fill',
+                            stylers: [{
+                                color: '#746855'
+                            }]
+                        },
+                        // Add more styling as needed
+                    ],
+                    disableDefaultUI: true,
+                    zoomControl: false
+                });
+
+                // Add marker for office location
+                marker = new google.maps.Marker({
+                    position: officeLocation,
+                    map: map,
+                    title: 'YourCompany Office',
+                    animation: google.maps.Animation.DROP
+                });
+
+                // Add info window
+                const infoWindow = new google.maps.InfoWindow({
+                    content: '<div style="padding: 10px;"><h3>YourCompany</h3><p>123 Business Street<br>Tech District, City 12345<br>Country</p></div>'
+                });
+
+                marker.addListener('click', function() {
+                    infoWindow.open(map, marker);
+                });
+            }
+
+            // Map control buttons
+            zoomInBtn.addEventListener('click', function() {
+                if (map) map.setZoom(map.getZoom() + 1);
+            });
+
+            zoomOutBtn.addEventListener('click', function() {
+                if (map) map.setZoom(map.getZoom() - 1);
+            });
+
+            locateMeBtn.addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        // Center map on user's location
+                        if (map) map.setCenter(userLocation);
+
+                        // Add marker for user's location
+                        new google.maps.Marker({
+                            position: userLocation,
+                            map: map,
+                            title: 'Your Location',
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 10,
+                                fillColor: '#4285F4',
+                                fillOpacity: 1,
+                                strokeColor: '#ffffff',
+                                strokeWeight: 2
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Add smooth scrolling to all links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Close mobile menu if open
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                });
+            });
+
+            // Initialize reveal animations for elements in viewport on load
+            window.dispatchEvent(new Event('scroll'));
+
+            // Handle form submission (if you add a form later)
+
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(this);
+
+                    // Simple validation example
+                    const email = formData.get('email');
+                    const message = formData.get('message');
+
+                    if (!email || !message) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    // Send form data using fetch API
+                    fetch('your-form-handler-url', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle success
+                            alert('Thank you for your message! We will get back to you soon.');
+                            contactForm.reset();
+                        })
+                        .catch(error => {
+                            // Handle error
+                            console.error('Error:', error);
+                            alert('There was an error sending your message. Please try again later.');
+                        });
+                });
+            }
+
+        });
+    </script>
+</body>
+
+</html>
