@@ -374,6 +374,14 @@
         .overlay.active {
             display: block;
         }
+        .admin-avatar img {
+            width: 80px;  /* Adjust size as needed */
+            height: 80px;
+            border-radius: 50%; /* Makes the image circular */
+            object-fit: cover; /* Ensures the image is properly cropped */
+            border: 2px solid #fff; /* Optional: Adds a white border */
+        }
+        
     </style>
 </head>
 <body>
@@ -391,10 +399,13 @@
         </div>
         
         <div class="admin-profile">
-            <div class="admin-avatar">Admin Avatar</div>
-            <div class="admin-name">Himanshu </div>
+            <div class="admin-avatar">
+                <img src="/static/Images/admin.jpg" alt="Admin Photo">
+            </div>
+            <div class="admin-name">Himanshu</div>
             <div class="admin-role">Super Admin</div>
         </div>
+        
         
         <ul class="nav-menu">
             <li class="nav-item">
@@ -436,10 +447,12 @@
         </ul>
         
         <div class="logout">
-            <a href="login.html" class="nav-link">
+            <a href="/" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
+        </div>
+        
         </div>
     </div>
 
